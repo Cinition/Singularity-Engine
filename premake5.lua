@@ -1,20 +1,16 @@
-VULKAN_ENV = os.getenv("VULKAN_SDK")
-
-project( "Singularity ")
+project( "Singularity")
 
     kind "StaticLib"
     language "C++"
     cppdialect "C++17"
-    targetdir "bin/%{cfg.buildcfg}"
     staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("../bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files { "src/**.h", "src/**.cpp" }
+    files { "Src/**.h", "Src/**.cpp" }
 
     includedirs {
-        "src",
         "Vendors/GLFW/include",
         "Vendors/GLM",
         "%{VULKAN_ENV}/Include",
