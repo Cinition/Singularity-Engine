@@ -6,8 +6,7 @@ group "Vendor"
 		language "C"
 		staticruntime "off"
 
-		files
-		{
+		files {
 			"include/GLFW/glfw3.h",
 			"include/GLFW/glfw3native.h",
 			"src/glfw_config.h",
@@ -31,8 +30,7 @@ group "Vendor"
 
 			systemversion "latest"
 			
-			files
-			{
+			files {
 				"src/x11_init.c",
 				"src/x11_monitor.c",
 				"src/x11_window.c",
@@ -45,16 +43,14 @@ group "Vendor"
 				"src/linux_joystick.c"
 			}
 
-			defines
-			{
+			defines {
 				"_GLFW_X11"
 			}
 
 		filter "system:windows"
 			systemversion "latest"
 
-			files
-			{
+			files {
 				"src/win32_init.c",
 				"src/win32_joystick.c",
 				"src/win32_module.c",
@@ -67,14 +63,12 @@ group "Vendor"
 				"src/osmesa_context.c"
 			}
 
-			defines 
-			{ 
+			defines { 
 				"_GLFW_WIN32",
 				"_CRT_SECURE_NO_WARNINGS"
 			}
 
-			links
-			{
+			links {
 				"Dwmapi.lib"
 			}
 
@@ -86,7 +80,49 @@ group "Vendor"
 			runtime "Release"
 			optimize "on"
 
-		filter "configurations:Dist"
+		filter "configurations:Publish"
+			runtime "Release"
+			optimize "on"
+			symbols "off"
+
+	project "ImGui"
+    
+		kind "StaticLib"
+		language "C++"
+		staticruntime "off"
+
+		files {
+			"imconfig.h",
+			"imgui.h",
+			"imgui.cpp",
+			"imgui_draw.cpp",
+			"imgui_internal.h",
+			"imgui_tables.cpp",
+			"imgui_widgets.cpp",
+			"imstb_rectpack.h",
+			"imstb_textedit.h",
+			"imstb_truetype.h",
+			"imgui_demo.cpp"
+		}
+
+		filter "system:windows"
+			systemversion "latest"
+			cppdialect "C++17"
+
+		filter "system:linux"
+			pic "On"
+			systemversion "latest"
+			cppdialect "C++17"
+
+		filter "configurations:Debug"
+			runtime "Debug"
+			symbols "on"
+
+		filter "configurations:Release"
+			runtime "Release"
+			optimize "on"
+
+		filter "configurations:Publish"
 			runtime "Release"
 			optimize "on"
 			symbols "off"

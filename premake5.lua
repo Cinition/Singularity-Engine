@@ -3,19 +3,22 @@ project "Singularity"
     kind "StaticLib"
     language "C++"
     cppdialect "C++17"
+    targetdir "bin/%{cfg.buildcfg}"
     staticruntime "off"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("../bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("../Bin-Int/" .. outputdir .. "/%{prj.name}")
 
-    files { 
-        "Src/**.h", 
-        "Src/**.cpp" 
+    files {
+        "Src/**.h",
+        "Src/**.cpp",
     }
 
     includedirs {
-        "Vendors/GLFW/include",
-        "Vendors/GLM",
+        "Src",
+        "Vendor/GLFW/include",
+        "Vendor/imgui",
+        "Vendor/GLM",
         "%{VULKAN_ENV}/Include",
     }
 
@@ -23,6 +26,7 @@ project "Singularity"
 
     links {
         "GLFW",
+        "ImGui",
         "%{VULKAN_ENV}/Lib/vulkan-1.lib",
     }
 
@@ -41,7 +45,7 @@ project "Singularity"
         optimize "On"
         symbols "On"
 
-    filter "configurations:Dist"
+    filter "configurations:Publish"
         defines { "WL_DIST" }
         runtime "Release"
         optimize "On"
