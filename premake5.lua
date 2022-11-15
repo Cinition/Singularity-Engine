@@ -1,4 +1,4 @@
-project( "Singularity")
+project "Singularity"
 
     kind "StaticLib"
     language "C++"
@@ -8,7 +8,10 @@ project( "Singularity")
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("../bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files { "Src/**.h", "Src/**.cpp" }
+    files { 
+        "Src/**.h", 
+        "Src/**.cpp" 
+    }
 
     includedirs {
         "Vendors/GLFW/include",
@@ -43,3 +46,14 @@ project( "Singularity")
         runtime "Release"
         optimize "On"
         symbols "Off"
+
+project "Vulkan"
+
+    kind "StaticLib"
+    language "C"
+    staticruntime "off"
+
+    files { 
+        "%{VULKAN_ENV}/Include/**.h",
+        "%{VULKAN_ENV}/Include/**.cpp",
+    }
