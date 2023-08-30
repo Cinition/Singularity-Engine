@@ -33,7 +33,7 @@ workspace "Singularity"
             defines { "RELEASE" }
 
         files {
-            "Src/**.h"
+            "Src/**.h",
             "Src/**.cpp"
         }
 
